@@ -49,9 +49,9 @@ function renderToy(toyObj) {
 
   const likeBtn = document.createElement('button');
   likeBtn.className = 'like-btn';
-  likeBtn.setAttribute('id', 'toyObj.id'); //// toyObj.id - CHECK
+  likeBtn.setAttribute('id', toyObj.id);
   likeBtn.innerText = 'like ❤';
-  // console.log(likeBtn);
+  console.log(likeBtn);
 
   // append elements to card
   card.append(name, pic, likes, likeBtn);
@@ -60,13 +60,13 @@ function renderToy(toyObj) {
   toyCollection.append(card);
 }
 
-//// Add a New Toy
-// 2 args - 2nd obj
-// obj - specify method as POSR and provide JSON headers and body
-const createToy = document.querySelector('.submit')
-createToy.addEventListener('click', fetchNewToy)
+// Add a New Toy
 
-function fetchNewToy(event) {//fetch(newToyUrl, newToyObj)
+// Form input
+const createToyForm = document.querySelector('.add-toy-form');
+createToyForm.addEventListener('submit', fetchNewToy);
+
+function fetchNewToy(toyObj) { // can I use toyObj not event?
   event.preventDefault();
   fetch('http://localhost:3000/toys', {
     method: 'POST',
@@ -81,16 +81,38 @@ function fetchNewToy(event) {//fetch(newToyUrl, newToyObj)
     })
   })
     .then(data => { return data.json })
-    .then(response => { console.log(response) }) // chain to renderNewToy function (for?)
+    // .then(response => { console.log(response) });
+    .then(function renderNewToy(response) {})
 }
 
-function renderNewToy (toyObj) {
-  // create card
-  // create inner card elements
+function renderNewToy(toyObj) {
+  // Create card
+  const card = document.createElement('div');
+  card.className = 'card';
+
+  // Create inner card elements
+  const name = document.createElement('h2');
+  name.innerText = event.target.children[1].value;
+
+  const pic = document.createElement('img');
+  pic.className = 'toy-avatar';
+  pic.src = event.target.children[3].value;
+
+  const likes = document.createElement('p');
+  likes.innerText = (`0 likes`); // EDIT?
+
+  const likeBtn = document.createElement('button');
+  likeBtn.className = 'like-btn';
+  likeBtn.setAttribute('id', toyObj.id);
+  likeBtn.innerText = 'like ❤';
+  console.log(likeBtn);
+
   // append elements to card
-  // append card to DOM
-}
+  card.append(name, pic, likes, likeBtn);
 
+  // append card to DOM
+  toyCollection.append(card);
+}
 // //// Increase a Toy's Likes
 // likeBtn.addEventListener('click', addLike)
 

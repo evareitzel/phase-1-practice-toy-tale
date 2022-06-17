@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
 // Create Toy Cards
 toyCollection = document.querySelector('#toy-collection'); 
 // console.log(toyCollection);
-const card = document.createElement('div');
-card.setAttribute('class', 'card');
+// const card = document.createElement('div');
+// card.setAttribute('class', 'card');
 
 fetch('http://localhost:3000/toys/')
 .then(response => response.json())
@@ -75,6 +75,37 @@ function renderToy(toyObj){
 // 2 args - 2nd obj
   // obj - specify method as POSR and provide JSON headers and body
 
+
+// Tweak form variable
+const createToyForm = document.querySelector('.add-toy-form') // grab form
+createToyForm.addEventListener('submit', fetchNewToy)
+
+function fetchNewToy(event) {//fetch(newToyUrl, newToyObj)
+  event.preventDefault();
+  // debugger;
+  event.target.children[1].value // name
+  event.target.children[3].value // img url
+  //start likes at 0
+
+  // fetch('http://localhost:3000/toys', {
+  //   method: 'POST',
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     Accept: "applcation/json"
+  //   },
+  //   body: JSON.stringify({
+  //     "name": toyObj.name,
+  //     "image": toyObj.image,
+  //     "likes": toyObj.likes
+  //   })
+  // })
+  //   .then(data => { return data.json })
+  //   .then(response => { console.log(response) }) // chain to renderNewToy function (for?)
+}
+
+
+
+
 const createToy = document.querySelector('.submit')
   console.log(createToy);
   createToy.addEventListener('click', addNewToy)
@@ -105,6 +136,16 @@ fetch(newToyUrl, newToyObj)
 
 // render toy
 // append new toy
+
+function renderNewToy (toyObj) {
+  // create card
+  // create inner card elements
+  // append elements to card
+  // append card to DOM
+}
+
+
+
 
 //// Increase a Toy's Likes
 
