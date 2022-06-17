@@ -51,7 +51,6 @@ function renderToy(toyObj) {
   likeBtn.className = 'like-btn';
   likeBtn.setAttribute('id', toyObj.id);
   likeBtn.innerText = 'like ❤';
-  console.log(likeBtn);
 
   // append elements to card
   card.append(name, pic, likes, likeBtn);
@@ -77,13 +76,12 @@ function fetchNewToy(toyObj) { // can I use toyObj not event?
     body: JSON.stringify({
       "name": toyObj.name,
       "image": toyObj.image,
-      "likes": toyObj.likes
+      "likes": 0
     })
   })
-    .then(data => { return data.json })
-    // .then(response => { console.log(response) });
-    .then(function renderNewToy(response) {})
-}
+    .then(data => data.json())
+    .then(response => console.log(response));
+    // .then(response => renderNewToy(response));
 
 function renderNewToy(toyObj) {
   // Create card
@@ -125,9 +123,9 @@ function renderNewToy(toyObj) {
 //   },
 
 //   body: JSON.stringify({
-//     "name": "Jessie",
-//     "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-//     "likes": 0
+    // "name": toyObj.name,
+    // "image": toyObj.image,
+    // "likes": 0
 //   }),
 //   method: 'PATCH'
 // };
@@ -136,9 +134,9 @@ function renderNewToy(toyObj) {
 // console.log(toyId);
 
 // function addLike(event) {
-//   event.preventDefault() // placement?
+//   event.preventDefault()
 //   fetch(likeUrl, likeObj)
-//     .then(data => { return data.json })
+//     .then(data => return data.json())
 //     .then(response => { console.log(response) })
 
-// }
+}
