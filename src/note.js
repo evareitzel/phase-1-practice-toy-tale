@@ -103,25 +103,22 @@ function fetchNewToy(event) {//fetch(newToyUrl, newToyObj)
   //   .then(response => { console.log(response) }) // chain to renderNewToy function (for?)
 }
 
-
-
-
 const createToy = document.querySelector('.submit')
   console.log(createToy);
   createToy.addEventListener('click', addNewToy)
 
   function addNewToy(toyObj){
   fetch('http://localhost:3000/toys'), {
-    method: 'POST',  
+    method: 'POST'  
     headers:
       {
         "Content-Type": "application/json",
         Accept: "applcation/json"
       },
       body: JSON.stringify({
-        "name": event.target.children[1].value
-        "image": toyObj.image,
-        "likes": toyObj.likes
+        "name" = toyObj.name,
+        "image" = toyObj.image,
+        "likes" = toyObj.likes
         // "name": "Jessie",
       // "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
       // "likes": 0

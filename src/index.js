@@ -63,13 +63,17 @@ function renderToy(toyObj) {
 
 // Form input
 const createToyForm = document.querySelector('.add-toy-form');
-createToyForm.addEventListener('submit', fetchNewToy);
+createToyForm.addEventListener('submit',
+  event => {event.preventDefault()
+    console.log(event.target.name)
+  fetchNewToy(event.target)
+  }
+)
 
-function fetchNewToy(toyObj) { // can I use toyObj not event?
+function fetchNewToy(toyObj) {
   // console.log(toyObj);
   // console.log(event.target);
   // console.log(event.target.children);
-  event.preventDefault();
   fetch('http://localhost:3000/toys', {
     method: 'POST',
     headers: {
@@ -77,17 +81,16 @@ function fetchNewToy(toyObj) { // can I use toyObj not event?
       Accept: "applcation/json"
     },
     body: JSON.stringify({
-      "name": toyObj.name,
-      "image": toyObj.image,
+      "name": toyObj.name.value,
+      "image": toyObj.image.value,
       "likes": 0
     })
   })
     .then(data => data.json())
-    .then(response => console.log(response));
-  // .then(response => renderNewToy(response));
-  console.log(event.target.children[1].value); //  name
-  console.log(event.target.children[3].value); // image
-
+    // .then(response => console.log(response));
+    .then(response => renderNewToy(response));
+  // console.log(event.target.children[1].value); //  name
+  // console.log(event.target.children[3].value); // image
 
   function renderNewToy(toyObj) {
     // Create card
@@ -96,11 +99,11 @@ function fetchNewToy(toyObj) { // can I use toyObj not event?
 
     // Create inner card elements
     const name = document.createElement('h2');
-    name.innerText = event.target.children[1].value;
+    name.innerText = event.target.name.value; // event.target.children[1].value
 
     const pic = document.createElement('img');
     pic.className = 'toy-avatar';
-    pic.src = event.target.children[3].value;
+    pic.src = event.target.image.value; // children[3]
 
     const likes = document.createElement('p');
     likes.innerText = (`0 likes`); // EDIT?
@@ -116,10 +119,13 @@ function fetchNewToy(toyObj) { // can I use toyObj not event?
 
     // append card to DOM
     toyCollection.append(card);
-    console.log(toyObj);
+    // console.log(toyObj);
   }
 
   //// Increase a Toy's Likes
+  // event.preventDefault();
+
+
   // likeBtn.addEventListener('click', addLike)
 
   // const likeUrl = 'http://localhost:3000/toys/:id';
