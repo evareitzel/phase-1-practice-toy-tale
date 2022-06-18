@@ -112,16 +112,16 @@ const createToy = document.querySelector('.submit')
 
   function addNewToy(toyObj){
   fetch('http://localhost:3000/toys'), {
-    method: 'POST'  
+    method: 'POST',  
     headers:
       {
         "Content-Type": "application/json",
         Accept: "applcation/json"
       },
       body: JSON.stringify({
-        "name" = toyObj.name,
-        "image" = toyObj.image,
-        "likes" = toyObj.likes
+        "name": event.target.children[1].value
+        "image": toyObj.image,
+        "likes": toyObj.likes
         // "name": "Jessie",
       // "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
       // "likes": 0

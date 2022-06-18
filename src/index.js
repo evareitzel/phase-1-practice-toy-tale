@@ -66,6 +66,9 @@ const createToyForm = document.querySelector('.add-toy-form');
 createToyForm.addEventListener('submit', fetchNewToy);
 
 function fetchNewToy(toyObj) { // can I use toyObj not event?
+  // console.log(toyObj);
+  // console.log(event.target);
+  // console.log(event.target.children);
   event.preventDefault();
   fetch('http://localhost:3000/toys', {
     method: 'POST',
@@ -81,62 +84,67 @@ function fetchNewToy(toyObj) { // can I use toyObj not event?
   })
     .then(data => data.json())
     .then(response => console.log(response));
-    // .then(response => renderNewToy(response));
+  // .then(response => renderNewToy(response));
+  console.log(event.target.children[1].value); //  name
+  console.log(event.target.children[3].value); // image
 
-function renderNewToy(toyObj) {
-  // Create card
-  const card = document.createElement('div');
-  card.className = 'card';
 
-  // Create inner card elements
-  const name = document.createElement('h2');
-  name.innerText = event.target.children[1].value;
+  function renderNewToy(toyObj) {
+    // Create card
+    const card = document.createElement('div');
+    card.className = 'card';
 
-  const pic = document.createElement('img');
-  pic.className = 'toy-avatar';
-  pic.src = event.target.children[3].value;
+    // Create inner card elements
+    const name = document.createElement('h2');
+    name.innerText = event.target.children[1].value;
 
-  const likes = document.createElement('p');
-  likes.innerText = (`0 likes`); // EDIT?
+    const pic = document.createElement('img');
+    pic.className = 'toy-avatar';
+    pic.src = event.target.children[3].value;
 
-  const likeBtn = document.createElement('button');
-  likeBtn.className = 'like-btn';
-  likeBtn.setAttribute('id', toyObj.id);
-  likeBtn.innerText = 'like ❤';
-  console.log(likeBtn);
+    const likes = document.createElement('p');
+    likes.innerText = (`0 likes`); // EDIT?
 
-  // append elements to card
-  card.append(name, pic, likes, likeBtn);
+    const likeBtn = document.createElement('button');
+    likeBtn.className = 'like-btn';
+    likeBtn.setAttribute('id', toyObj.id);
+    likeBtn.innerText = 'like ❤';
+    console.log(likeBtn);
 
-  // append card to DOM
-  toyCollection.append(card);
-}
-// //// Increase a Toy's Likes
-// likeBtn.addEventListener('click', addLike)
+    // append elements to card
+    card.append(name, pic, likes, likeBtn);
 
-// const likeUrl = 'http://localhost:3000/toys/:id';
-// const likeObj = {
-//   headers:
-//   {
-//     "Content-Type": "application/json",
-//     Accept: "applcation/json"
-//   },
+    // append card to DOM
+    toyCollection.append(card);
+    console.log(toyObj);
+  }
 
-//   body: JSON.stringify({
-    // "name": toyObj.name,
-    // "image": toyObj.image,
-    // "likes": 0
-//   }),
-//   method: 'PATCH'
-// };
+  //// Increase a Toy's Likes
+  // likeBtn.addEventListener('click', addLike)
 
-// const toyId = toyObj.id;
-// console.log(toyId);
+  // const likeUrl = 'http://localhost:3000/toys/:id';
+  // const likeObj = {
+  //   headers:
+  //   {
+  //     "Content-Type": "application/json",
+  //     Accept: "applcation/json"
+  //   },
 
-// function addLike(event) {
-//   event.preventDefault()
-//   fetch(likeUrl, likeObj)
-//     .then(data => return data.json())
-//     .then(response => { console.log(response) })
+  //   body: JSON.stringify({
+  // "name": toyObj.name,
+  // "image": toyObj.image,
+  // "likes": 0
+  //   }),
+  //   method: 'PATCH'
+  // };
+
+  // const toyId = toyObj.id;
+  // console.log(toyId);
+
+  // function addLike(event) {
+  //   event.preventDefault()
+  //   fetch(likeUrl, likeObj)
+  //     .then(data => return data.json())
+  //     .then(response => { console.log(response) })
 
 }
