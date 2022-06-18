@@ -64,9 +64,10 @@ function renderToy(toyObj) {
 // Form input
 const createToyForm = document.querySelector('.add-toy-form');
 createToyForm.addEventListener('submit',
-  event => {event.preventDefault()
+  event => {
+    event.preventDefault()
     console.log(event.target.name)
-  fetchNewToy(event.target)
+    fetchNewToy(event.target)
   }
 )
 
@@ -91,6 +92,7 @@ function fetchNewToy(toyObj) {
     .then(response => renderNewToy(response));
   // console.log(event.target.children[1].value); //  name
   // console.log(event.target.children[3].value); // image
+}
 
   function renderNewToy(toyObj) {
     // Create card
@@ -102,7 +104,6 @@ function fetchNewToy(toyObj) {
     name.innerText = event.target.name.value; // event.target.children[1].value
 
     const pic = document.createElement('img');
-    pic.className = 'toy-avatar';
     pic.src = event.target.image.value; // children[3]
 
     const likes = document.createElement('p');
@@ -123,34 +124,27 @@ function fetchNewToy(toyObj) {
   }
 
   //// Increase a Toy's Likes
-  // event.preventDefault();
+  const likeBtn = document.querySelector('.likeBtn')
+  likeBtn.addEventListener('click', addLike)
+  console.log(likeBtn)
 
-
-  // likeBtn.addEventListener('click', addLike)
-
-  // const likeUrl = 'http://localhost:3000/toys/:id';
-  // const likeObj = {
-  //   headers:
-  //   {
-  //     "Content-Type": "application/json",
-  //     Accept: "applcation/json"
-  //   },
-
-  //   body: JSON.stringify({
-  // "name": toyObj.name,
-  // "image": toyObj.image,
-  // "likes": 0
-  //   }),
-  //   method: 'PATCH'
-  // };
-
-  // const toyId = toyObj.id;
+  const toyId = toyObj.id;
   // console.log(toyId);
 
-  // function addLike(event) {
-  //   event.preventDefault()
-  //   fetch(likeUrl, likeObj)
-  //     .then(data => return data.json())
-  //     .then(response => { console.log(response) })
-
+function addLike(event) {
+  event.preventDefault();
+  fetch('http://localhost:3000/toys/:id', {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "applcation/json"
+    },
+    body: JSON.stringify({
+      "name": toyObj.name,
+      "image": toyObj.image,
+      "likes": 0
+    })
+  })
+  .then(data => data.json())
+  .then(response => console.log(response))
 }
