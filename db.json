@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 101
     },
     {
       "id": 2,
@@ -71,12 +71,6 @@
       "image": "https://www.hasbro.com/common/productimages/en_US/D89F55402A17482C92684EABFA31D36C/245C00DCA1EB4784A7356F4727682F8A.jpg",
       "likes": 0,
       "id": 16
-    },
-    {
-      "name": "Koosh",
-      "image": "https://media.istockphoto.com/photos/colorful-koosh-ball-isolated-on-white-background-picture-id1278727707?k=20&m=1278727707&s=612x612&w=0&h=BxIEtg4YgLAUTnYF0fGrBdrlgIRPj02xVNxqpG_Z3T0=",
-      "likes": 0,
-      "id": 17
     }
   ]
 }

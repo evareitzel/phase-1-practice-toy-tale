@@ -193,3 +193,29 @@ function addLike(event){
 
   // p - num likes
   // btn tag - class like-btn, attribute set to toy's id num
+
+    //// Increase a Toy's Likes
+    const likeBtn = document.querySelector('.likeBtn')
+    console.log(likeBtn)
+    likeBtn.addEventListener('click', addLike)
+  
+    const toyId = toyObj.id;
+    // console.log(toyId);
+  
+  function addLike(event) {
+    event.preventDefault();
+    fetch('http://localhost:3000/toys/:id', {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "applcation/json"
+      },
+      body: JSON.stringify({
+        "name": toyObj.name,
+        "image": toyObj.image,
+        "likes": 0
+      })
+    })
+    .then(data => data.json())
+    .then(response => console.log(response))
+  }

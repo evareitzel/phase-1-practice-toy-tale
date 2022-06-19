@@ -28,7 +28,7 @@ fetch('http://localhost:3000/toys/')
   .then(function (data) {
     data.forEach((toyObj) => {
       renderToy(toyObj);
-    })
+    })  
   })
 
 function renderToy(toyObj) {
@@ -51,6 +51,7 @@ function renderToy(toyObj) {
   likeBtn.className = 'like-btn';
   likeBtn.setAttribute('id', toyObj.id);
   likeBtn.innerText = 'like ❤';
+  likeBtn.addEventListener('click', event => addLike(event, toyObj));  
 
   // append elements to card
   card.append(name, pic, likes, likeBtn);
@@ -124,27 +125,22 @@ function fetchNewToy(toyObj) {
   }
 
   //// Increase a Toy's Likes
-  const likeBtn = document.querySelector('.likeBtn')
-  likeBtn.addEventListener('click', addLike)
-  console.log(likeBtn)
-
-  const toyId = toyObj.id;
-  // console.log(toyId);
-
-function addLike(event) {
-  event.preventDefault();
-  fetch('http://localhost:3000/toys/:id', {
+function addLike(event, toyObj) {
+  const more = parseInt(toyObj.likes) + 1;
+  fetch(`http://localhost:3000/toys/${toyObj.id}`, { // toyObj == event.target
     method: 'PATCH',
     headers: {
       "Content-Type": "application/json",
-      Accept: "applcation/json"
+      Accept: "application/json"
     },
     body: JSON.stringify({
       "name": toyObj.name,
       "image": toyObj.image,
-      "likes": 0
+      "likes": more
     })
   })
   .then(data => data.json())
-  .then(response => console.log(response))
+  // .then(response => console.log(response))
+  .then(response => {
+    event.target.previousElementSibling.innerText = `${more} likes`})
 }
